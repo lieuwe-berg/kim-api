@@ -3,40 +3,33 @@ module.exports = (image) => {
 
         if (!image) throw new TypeError('No image provided.');
 
-        const https = require('https'),
-              fs = require('fs');
-
-        const options = {
-            method: 'POST'
-        }
-
-        let request = https.request(`https://kim.kieranhowland.co.uk/api/upload`, options, (res) => {
-
-            // // Errors
-            // const { statusCode } = res;
-            // if (statusCode != 200 && statusCode != 404) {
-            //     // Consume res data
-            //     res.resume();
-            //     reject(new Error(`Request Failed.\n Status Code: ${statusCode}`).message);
-            // }
-
-            let raw = '';
-            res.on('data', chunk => raw += chunk);
-            res.on('end', () => {
-                try {
-                    // let parsed = JSON.parse(raw);
-                    resolve(raw);
-                } catch (err) {
-                    reject(err);
+        const request = require('request'),
+            fs = require('fs'),
+            options = {
+                method: "POST",
+                url: "https://kim.kieranhowland.co.uk/api/upload",
+                port: 443,
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+                formData : {
+                    "image": fs.createReadStream(image)
                 }
-            })
+            };
 
-        }).on('error', err => {
-            reject(err);
-        })
+        request(options, (err, res, body) => {
+            if(err) reject(err);
+            
+            try {
+                let parsed = JSON.parse(body);
 
-        let imageFile = fs.createReadStream(image);
-        request.pipe(imageFile);
+                parsed.url = `https://kim.kieranhowland.co.uk/uploads/${parsed.info.image_id}/`
+
+                resolve(parsed);
+            } catch(error) {
+                reject(err);
+            }
+        });
 
     })
 }

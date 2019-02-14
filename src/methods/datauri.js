@@ -3,32 +3,16 @@ module.exports = (imageID) => {
 
         if (!imageID) throw new TypeError('No imageID provided.');
 
-        const https = require('https');
+        const request = require('request'),
+        options = {
+            method: "GET",
+            url: "https://kim.kieranhowland.co.uk/api/datauri/" + imageID,
+            port: 443
+        };
 
-        https.get(`https://kim.kieranhowland.co.uk/api/datauri/${imageID}`, (res) => {
-
-            // Errors
-            const { statusCode } = res;
-            if (statusCode != 200 && statusCode != 404) {
-                // Consume res data
-                res.resume();
-                reject(new Error(`Request Failed.\n Status Code: ${statusCode}`).message);
-            }
-
-
-            let raw = '';
-            res.on('data', chunk => raw += chunk);
-            res.on('end', () => {
-                try {
-                    let parsed = JSON.parse(raw);
-                    resolve(parsed);
-                } catch (err) {
-                    reject(err);
-                }
-            })
-
-        }).on('error', err => {
-            reject(err);
+        request(options, (err, res, body) => {
+            if (err) reject(err);
+            resolve(body);
         })
 
     })
