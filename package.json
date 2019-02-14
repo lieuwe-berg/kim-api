@@ -1,6 +1,6 @@
 {
   "name": "kim-api",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An API-wrapper for Kie's Image Machine. Completely anonymous image hosting.",
   "main": "src/index.js",
   "repository": {
