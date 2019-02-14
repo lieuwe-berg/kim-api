@@ -1,6 +1,6 @@
 # kim-api
 
-![](https://img.shields.io/npm/v/kim-api.svg?style=for-the-badge) ![](https://img.shields.io/bundlephobia/min/kim-api.svg?style=for-the-badge)
+![](https://img.shields.io/npm/v/kim-api.svg?style=for-the-badge) ![](https://img.shields.io/github/repo-size/lieuwe-berg/kim-api.svg?style=for-the-badge)
 
 An API-wrapper for [Kie's Image Machine](https://kim.kieranhowland.co.uk/) (kim). Completely anonymous image hosting.
 

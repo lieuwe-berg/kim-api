@@ -1,6 +1,6 @@
 {
   "name": "kim-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An API-wrapper for Kie's Image Machine. Completely anonymous image hosting.",
   "main": "index.js",
   "repository": {
@@ -15,7 +15,7 @@
     "upload"
   ],
   "author": "lieuwe_berg",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "Apache 2.0",
   "bugs": {
     "url": "https://github.com/lieuwe-berg/kim-api/issues"
   },
