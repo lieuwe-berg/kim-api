@@ -18,7 +18,7 @@ module.exports = (image) => {
             };
 
         request(options, (err, res, body) => {
-            if(err) reject(err);
+            if (err) throw (err);
             
             try {
                 let parsed = JSON.parse(body);

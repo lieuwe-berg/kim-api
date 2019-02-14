@@ -9,8 +9,14 @@ module.exports = () => {
         };
 
         request(options, (err, res, body) => {
-            if (err) reject(err);
-            resolve(body);
+            if (err) throw (err);
+            
+            try {
+                let parsed = JSON.parse(body);
+                resolve(parsed);
+            } catch(error) {
+                reject(err);
+            }
         })
 
     })
