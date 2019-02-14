@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/lieuwe-berg/kim-api/issues"
   },
-  "homepage": "https://github.com/lieuwe-berg/kim-api#readme"
+  "homepage": "https://github.com/lieuwe-berg/kim-api#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
 }
