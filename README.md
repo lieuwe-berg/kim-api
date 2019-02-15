@@ -17,9 +17,10 @@ Uploading an image to kim.
 ```js
 // require kim-api
 const kim = require('kim-api');
+const path = require('path');
 
 // upload
-kim.upload('image.png')
+kim.upload(path.join(__dirname, 'image.png'))
     .then(img => {
         console.log(img.url);
     })
@@ -84,17 +85,24 @@ Example response:
 {
     "status":"success",
     "data":{
-        "uploads": 4612
+        "uploads": 4627
     }
 }
 ```
 
 ## Errors
-When there's an error on kim server-sided, the API will return a response similar to this:
+If there's an error on kim server-sided, an Error will be thrown.
 
-```json
-{
-    "status":"error",
-    "ino":"invalidPathMethod"    
-}
+```js
+Error: kim-api error: recieved status code 400 - invalidFileExtension
+    // stack trace ...
 ```
+
+If not all arguments required for a method are provided, a TypeError will be thrown.
+
+```js
+TypeError: No image provided.
+    // stack trace ...
+```
+
+`.catch()` these errors to prevent UnhandledPromiseRejectionWarnings.

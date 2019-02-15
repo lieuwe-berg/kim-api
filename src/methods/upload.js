@@ -1,7 +1,7 @@
 module.exports = (image) => {
     return new Promise((resolve, reject) => {
 
-        if (!image) throw new TypeError('No image provided.');
+        if (!image) throw new TypeError ('No image provided.');
 
         const request = require('request'),
             fs = require('fs'),
@@ -18,16 +18,18 @@ module.exports = (image) => {
             };
 
         request(options, (err, res, body) => {
-            if (err) throw (err);
+            if (err) throw new Error (err);
             
             try {
                 let parsed = JSON.parse(body);
 
-                parsed.url = `https://kim.kieranhowland.co.uk/uploads/${parsed.info.image_id}/`
+                if (parsed.status != 200) throw new Error (`kim-api error: recieved status code ${parsed.status} - ${parsed.code}`);
+
+                parsed.url = `https://kim.kieranhowland.co.uk/uploads/${parsed.data.image_id}/`
 
                 resolve(parsed);
             } catch(error) {
-                reject(err);
+                throw new Error (error);
             }
         });
 
